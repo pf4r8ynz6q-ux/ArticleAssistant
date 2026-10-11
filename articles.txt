@@ -1,0 +1,1631 @@
+der;Mann;man
+die;Frau;woman
+das;Kind;child
+der;Junge;boy
+das;Mädchen;girl
+der;Vater;father
+die;Mutter;mother
+die;Eltern;parents
+der;Sohn;son
+die;Tochter;daughter
+der;Bruder;brother
+die;Schwester;sister
+die;Geschwister;siblings
+der;Opa;grandpa
+die;Oma;grandma
+die;Großeltern;grandparents
+der;Onkel;uncle
+die;Tante;aunt
+der;Cousin;cousin (male)
+die;Cousine;cousin (female)
+der;Neffe;nephew
+die;Nichte;niece
+der;Freund;friend (male) / boyfriend
+die;Freundin;friend (female) / girlfriend
+der;Mensch;person / human being
+die;Leute;people
+der;Herr;Mr. / gentleman
+die;Dame;lady
+das;Baby;baby
+der;Partner;partner (male)
+die;Partnerin;partner (female)
+der;Kollege;colleague (male)
+die;Kollegin;colleague (female)
+der;Nachbar;neighbor (male)
+die;Nachbarin;neighbor (female)
+der;Gast;guest
+der;Chef;boss (male)
+die;Chefin;boss (female)
+der;Körper;body
+der;Kopf;head
+das;Gesicht;face
+das;Haar;hair
+das;Auge;eye
+die;Nase;nose
+der;Mund;mouth
+die;Lippe;lip
+der;Zahn;tooth
+die;Zunge;tongue
+das;Ohr;ear
+der;Hals;neck / throat
+der;Arm;arm
+die;Hand;hand
+der;Finger;finger
+der;Daumen;thumb
+der;Bauch;belly / stomach
+der;Rücken;back
+das;Bein;leg
+der;Fuß;foot
+der;Zeh;toe
+das;Knie;knee
+die;Schulter;shoulder
+das;Herz;heart
+das;Blut;blood
+die;Kleidung;clothing
+die;Jacke;jacket
+der;Mantel;coat
+der;Pullover;sweater / pullover
+das;Hemd;shirt
+die;Bluse;blouse
+das;T-Shirt;t-shirt
+die;Hose;pants / trousers
+die;Jeans;jeans
+der;Rock;skirt
+das;Kleid;dress
+der;Anzug;suit
+der;Schuh;shoe
+der;Stiefel;boot
+die;Socke;sock
+der;Strumpf;stocking
+der;Hut;hat
+die;Mütze;cap / beanie
+der;Schal;scarf
+der;Handschuh;glove
+der;Gürtel;belt
+die;Brille;glasses
+die;Tasche;bag / pocket
+der;Schmuck;jewelry
+die;Uhr;watch / clock
+das;Essen;food / meal
+das;Trinken;drink
+das;Frühstück;breakfast
+das;Mittagessen;lunch
+das;Abendessen;dinner
+das;Brot;bread
+das;Brötchen;bread roll
+die;Butter;butter
+der;Käse;cheese
+die;Wurst;sausage
+der;Schinken;ham
+das;Fleisch;meat
+das;Hähnchen;chicken
+der;Fisch;fish
+das;Ei;egg
+das;Gemüse;vegetables
+die;Kartoffel;potato
+die;Tomate;tomato
+der;Salat;salad / lettuce
+die;Zwiebel;onion
+der;Knoblauch;garlic
+das;Obst;fruit
+der;Apfel;apple
+die;Banane;banana
+die;Orange;orange
+die;Zitrone;lemon
+die;Erdbeere;strawberry
+der;Kuchen;cake
+das;Eis;ice cream
+die;Schokolade;chocolate
+der;Zucker;sugar
+das;Salz;salt
+der;Pfeffer;pepper
+das;Wasser;water
+die;Milch;milk
+der;Saft;juice
+der;Kaffee;coffee
+der;Tee;tea
+das;Bier;beer
+der;Wein;wine
+die;Suppe;soup
+der;Reis;rice
+die;Nudel;pasta / noodle
+die;Pizza;pizza
+das;Mehl;flour
+das;Öl;oil
+der;Essig;vinegar
+das;Haus;house
+die;Wohnung;apartment
+das;Zimmer;room
+das;Wohnzimmer;living room
+das;Schlafzimmer;bedroom
+die;Küche;kitchen
+das;Badezimmer;bathroom
+die;Toilette;toilet
+der;Flur;hallway
+der;Balkon;balcony
+der;Garten;garden
+die;Garage;garage
+der;Keller;basement
+das;Dach;roof
+die;Wand;wall
+der;Boden;floor
+die;Decke;ceiling
+das;Fenster;window
+die;Tür;door
+der;Schlüssel;key
+die;Treppe;stairs
+das;Licht;light
+die;Lampe;lamp
+der;Tisch;table
+der;Stuhl;chair
+der;Sessel;armchair
+das;Sofa;sofa
+das;Bett;bed
+der;Schrank;closet / cabinet
+das;Regal;shelf
+der;Spiegel;mirror
+das;Bild;picture
+der;Vorhang;curtain
+der;Teppich;carpet / rug
+die;Heizung;heating
+der;Kühlschrank;refrigerator
+der;Herd;stove
+der;Backofen;oven
+die;Mikrowelle;microwave
+die;Spüle;sink (kitchen)
+der;Wasserhahn;faucet
+die;Dusche;shower
+die;Badewanne;bathtub
+das;Waschbecken;sink (bathroom)
+die;Waschmaschine;washing machine
+die;Stadt;city
+das;Dorf;village
+die;Straße;street
+der;Weg;path / way
+der;Platz;square / place
+die;Brücke;bridge
+das;Gebäude;building
+der;Bahnhof;train station
+der;Flughafen;airport
+die;Haltestelle;stop (bus/tram)
+das;Zentrum;center
+die;Ampel;traffic light
+die;Kreuzung;intersection
+der;Park;park
+das;Geschäft;shop / store
+der;Supermarkt;supermarket
+die;Bäckerei;bakery
+die;Metzgerei;butcher shop
+die;Apotheke;pharmacy
+die;Bank;bank
+die;Post;post office
+das;Restaurant;restaurant
+das;Café;café
+die;Kneipe;pub / bar
+das;Hotel;hotel
+das;Kino;cinema
+das;Theater;theater
+das;Museum;museum
+die;Kirche;church
+die;Schule;school
+die;Universität;university
+der;Kindergarten;kindergarten
+das;Krankenhaus;hospital
+die;Polizei;police
+die;Feuerwehr;fire department
+das;Rathaus;city hall
+die;Bibliothek;library
+das;Auto;car
+das;Fahrrad;bicycle
+der;Bus;bus
+der;Zug;train
+die;Bahn;train / railway
+die;U-Bahn;subway
+die;S-Bahn;suburban train
+die;Straßenbahn;tram
+das;Flugzeug;airplane
+das;Schiff;ship
+das;Boot;boat
+das;Taxi;taxi
+das;Motorrad;motorcycle
+das;Ticket;ticket
+der;Führerschein;driver's license
+die;Arbeit;work / job
+der;Beruf;profession / occupation
+die;Stelle;position / job
+das;Büro;office
+der;Schreibtisch;desk
+der;Computer;computer
+der;Laptop;laptop
+der;Bildschirm;screen / monitor
+die;Tastatur;keyboard
+die;Maus;mouse
+der;Drucker;printer
+das;Telefon;telephone
+das;Handy;cell phone
+die;E-Mail;email
+das;Papier;paper
+der;Stift;pen
+der;Kugelschreiber;ballpoint pen
+der;Bleistift;pencil
+das;Buch;book
+das;Heft;notebook
+der;Ordner;binder / folder
+der;Termin;appointment
+die;Besprechung;meeting
+der;Vertrag;contract
+die;Rechnung;bill / invoice
+das;Geld;money
+der;Preis;price
+der;Kunde;customer (male)
+die;Kundin;customer (female)
+der;Urlaub;vacation / holiday
+die;Pause;break
+das;Wochenende;weekend
+der;Unterricht;lesson / class
+der;Lehrer;teacher (male)
+die;Lehrerin;teacher (female)
+der;Schüler;pupil (male)
+die;Schülerin;pupil (female)
+der;Student;student (male, university)
+die;Studentin;student (female, university)
+die;Klasse;class
+das;Fach;subject
+die;Hausaufgabe;homework
+die;Prüfung;exam
+die;Note;grade
+das;Zeugnis;report card
+die;Frage;question
+die;Antwort;answer
+das;Beispiel;example
+das;Wort;word
+der;Satz;sentence
+der;Text;text
+die;Sprache;language
+die;Natur;nature
+die;Welt;world
+die;Sonne;sun
+der;Mond;moon
+der;Stern;star
+der;Himmel;sky / heaven
+die;Wolke;cloud
+der;Regen;rain
+der;Schnee;snow
+der;Wind;wind
+das;Wetter;weather
+die;Luft;air
+die;Erde;earth / ground
+der;Stein;stone
+der;Berg;mountain
+der;Hügel;hill
+das;Tal;valley
+der;Wald;forest
+der;Baum;tree
+das;Blatt;leaf
+die;Blume;flower
+das;Gras;grass
+die;Pflanze;plant
+der;Fluss;river
+der;See;lake
+das;Meer;sea / ocean
+der;Strand;beach
+die;Insel;island
+das;Feuer;fire
+das;Tier;animal
+der;Hund;dog
+die;Katze;cat
+das;Pferd;horse
+die;Kuh;cow
+das;Schwein;pig
+das;Schaf;sheep
+die;Ziege;goat
+das;Huhn;chicken
+der;Vogel;bird
+der;Bär;bear
+der;Löwe;lion
+der;Elefant;elephant
+die;Biene;bee
+der;Schmetterling;butterfly
+die;Spinne;spider
+die;Ameise;ant
+die;Zeit;time
+die;Uhr;clock / o'clock
+die;Sekunde;second
+die;Minute;minute
+die;Stunde;hour
+der;Tag;day
+die;Woche;week
+der;Monat;month
+das;Jahr;year
+das;Jahrzehnt;decade
+das;Jahrhundert;century
+der;Morgen;morning
+der;Vormittag;late morning
+der;Mittag;midday / noon
+der;Nachmittag;afternoon
+der;Abend;evening
+die;Nacht;night
+die;Mitternacht;midnight
+der;Montag;Monday
+der;Dienstag;Tuesday
+der;Mittwoch;Wednesday
+der;Donnerstag;Thursday
+der;Freitag;Friday
+der;Samstag;Saturday
+der;Sonntag;Sunday
+der;Januar;January
+der;Februar;February
+der;März;March
+der;April;April
+der;Mai;May
+der;Juni;June
+der;Juli;July
+der;August;August
+der;September;September
+der;Oktober;October
+der;November;November
+der;Dezember;December
+der;Frühling;spring
+der;Sommer;summer
+der;Herbst;autumn / fall
+der;Winter;winter
+das;Datum;date
+der;Kalender;calendar
+der;Anfang;beginning
+das;Ende;end
+die;Vergangenheit;past
+die;Gegenwart;present
+die;Zukunft;future
+die;Sache;thing / matter
+das;Ding;thing
+die;Idee;idea
+der;Gedanke;thought
+die;Meinung;opinion
+das;Problem;problem
+die;Lösung;solution
+der;Grund;reason
+die;Art;type / kind / way
+die;Hilfe;help
+die;Angst;fear
+die;Freude;joy
+das;Glück;luck / happiness
+die;Liebe;love
+der;Hass;hate
+die;Wut;anger / rage
+das;Gefühl;feeling
+der;Schmerz;pain
+die;Gesundheit;health
+die;Krankheit;illness / disease
+das;Leben;life
+der;Tod;death
+der;Name;name
+die;Nummer;number
+die;Farbe;color
+die;Musik;music
+das;Lied;song
+die;Kunst;art
+die;Geschichte;story / history
+die;Nachricht;message / news
+die;Information;information
+das;Gespräch;conversation
+der;Wunsch;wish
+der;Traum;dream
+das;Spiel;game
+der;Sport;sport
+die;Reise;trip / journey
+das;Fest;party / festival
+das;Geschenk;gift / present
+die;Regel;rule
+das;Gesetz;law
+die;Macht;power / force
+der;Frieden;peace
+der;Krieg;war
+der;Unterschied;difference
+der;Teil;part
+die;Seite;side / page
+die;Richtung;direction
+die;Größe;size
+das;Gewicht;weight
+die;Form;shape / form
+die;Stimme;voice
+das;Geräusch;noise / sound
+die;Ruhe;quiet / calm
+der;Platz;space / room
+der;Anfang;start
+das;Ziel;goal / destination
+der;Weg;way / path
+der;Fehler;mistake / error
+die;Chance;chance / opportunity
+die;Gefahr;danger
+der;Teller;plate
+die;Tasse;cup
+das;Glas;glass
+das;Besteck;cutlery
+die;Gabel;fork
+der;Löffel;spoon
+das;Messer;knife
+der;Topf;pot
+die;Pfanne;pan
+die;Schüssel;bowl
+der;Mülleimer;trash can
+der;Staubsauger;vacuum cleaner
+das;Bügeleisen;iron
+das;Handtuch;towel
+die;Seife;soap
+das;Shampoo;shampoo
+die;Zahnbürste;toothbrush
+die;Zahnpasta;toothpaste
+der;Kamm;comb
+die;Bürste;brush
+der;Föhn;hairdryer
+das;Kissen;pillow
+die;Decke;blanket
+das;Bettlaken;bed sheet
+der;Wecker;alarm clock
+das;Hobby;hobby
+die;Freizeit;free time
+der;Spaziergang;walk / stroll
+die;Wanderung;hike
+der;Film;movie
+die;Serie;series
+die;Zeitung;newspaper
+die;Zeitschrift;magazine
+das;Rätsel;puzzle / riddle
+das;Instrument;instrument
+die;Gitarre;guitar
+das;Klavier;piano
+die;Geige;violin
+das;Schwimmbad;swimming pool
+der;Fußball;football / soccer
+der;Ball;ball
+der;Tanz;dance
+die;Party;party
+die;Fotografie;photography
+das;Foto;photo
+die;Kamera;camera
+das;Konzert;concert
+die;Ausstellung;exhibition
+der;Verein;club / association
+das;Mitglied;member
+der;Markt;market
+der;Spielplatz;playground
+der;Turm;tower
+der;Palast;palace
+die;Burg;castle
+das;Schloss;castle / palace
+der;Hafen;harbor / port
+die;Küste;coast
+die;Grenze;border
+das;Land;country / land
+der;Staat;state / country
+die;Hauptstadt;capital city
+die;Region;region
+der;Kontinent;continent
+der;Norden;north
+der;Süden;south
+der;Westen;west
+der;Osten;east
+die;Fabrik;factory
+das;Werk;plant / factory
+das;Kraftwerk;power plant
+die;Baustelle;construction site
+der;Friedhof;cemetery
+das;Studium;studies (university)
+der;Professor;professor (male)
+die;Professorin;professor (female)
+die;Vorlesung;lecture
+das;Seminar;seminar
+das;Examen;exam
+die;Mensa;canteen (university)
+das;Stipendium;scholarship
+der;Hörsaal;lecture hall
+das;Semester;semester
+die;Ausbildung;training / apprenticeship
+der;Azubi;trainee / apprentice
+die;Berufsschule;vocational school
+der;Brief;letter
+die;Postkarte;postcard
+das;Paket;package / parcel
+der;Anruf;phone call
+die;SMS;text message
+das;Interview;interview
+die;Diskussion;discussion
+der;Vortrag;presentation / lecture
+die;Rede;speech
+die;Anzeige;advertisement
+die;Werbung;advertising
+das;Schild;sign
+die;Notiz;note
+das;Formular;form
+die;Unterschrift;signature
+die;Regierung;government
+der;Präsident;president (male)
+die;Präsidentin;president (female)
+der;König;king
+die;Königin;queen
+das;Parlament;parliament
+die;Wahl;election / choice
+die;Partei;party (political)
+die;Demokratie;democracy
+die;Gesellschaft;society
+der;Bürger;citizen (male)
+die;Bürgerin;citizen (female)
+das;Recht;right / law
+die;Pflicht;duty / obligation
+die;Steuer;tax
+die;Wirtschaft;economy
+die;Industrie;industry
+der;Handel;trade / commerce
+der;Export;export
+der;Import;import
+der;Arzt;doctor (male)
+die;Ärztin;doctor (female)
+der;Zahnarzt;dentist (male)
+die;Zahnärztin;dentist (female)
+der;Krankenwagen;ambulance
+die;Operation;operation / surgery
+das;Rezept;prescription
+das;Medikament;medication
+die;Tablette;pill
+der;Husten;cough
+der;Schnupfen;cold / sniffles
+das;Fieber;fever
+die;Verletzung;injury
+die;Wunde;wound
+das;Pflaster;band-aid
+der;Verband;bandage / association
+die;Versicherung;insurance
+das;Werkzeug;tool
+der;Hammer;hammer
+die;Schraube;screw
+der;Nagel;nail
+die;Zange;pliers
+die;Säge;saw
+das;Holz;wood
+das;Metall;metal
+der;Stahl;steel
+das;Eisen;iron
+das;Gold;gold
+das;Silber;silver
+das;Plastik;plastic
+der;Stoff;fabric / material
+die;Wolle;wool
+die;Baumwolle;cotton
+das;Leder;leather
+der;Klebstoff;glue
+die;Farbe;paint / color
+der;Pinsel;paintbrush
+das;Lesen;reading
+das;Schreiben;writing
+das;Sprechen;speaking
+das;Hören;listening
+das;Sehen;seeing
+das;Laufen;running / walking
+das;Fahren;driving / riding
+das;Schwimmen;swimming
+das;Singen;singing
+das;Tanzen;dancing
+das;Lachen;laughing
+das;Weinen;crying
+das;Denken;thinking
+das;Träumen;dreaming
+das;Arbeiten;working
+das;Lernen;learning
+das;Spielen;playing
+das;Kochen;cooking
+das;Backen;baking
+das;Putzen;cleaning
+das;Treffen;meeting
+das;Warten;waiting
+die;Abteilung;department
+der;Angestellte;employee (male)
+die;Angestellte;employee (female)
+der;Arbeitgeber;employer
+der;Arbeitnehmer;employee
+die;Bewerbung;application
+das;Einkommen;income
+die;Erfahrung;experience
+das;Gehalt;salary
+die;Karriere;career
+die;Kündigung;resignation / termination
+der;Lebenslauf;resume / CV
+das;Praktikum;internship
+der;Ruhestand;retirement
+die;Überstunde;overtime
+der;Vorgesetzte;superior / supervisor
+das;Vorstellungsgespräch;job interview
+die;Datei;file
+die;Daten;data
+das;Gerät;device
+das;Internet;internet
+die;Nachricht;news / message
+das;Netzwerk;network
+das;Programm;program
+die;Sendung;broadcast / show
+die;Software;software
+die;Webseite;website
+der;Zugang;access
+der;Anschluss;connection
+die;Anleitung;instruction / manual
+die;Abfahrt;departure
+die;Ankunft;arrival
+der;Aufenthalt;stay
+die;Auskunft;information
+der;Ausweis;ID card
+die;Buchung;booking / reservation
+die;Fahrkarte;ticket (for transport)
+das;Gepäck;luggage
+der;Koffer;suitcase
+der;Pass;passport
+der;Reiseführer;guidebook / tour guide
+die;Reservierung;reservation
+die;Sehenswürdigkeit;sight / landmark
+die;Unterkunft;accommodation
+der;Zoll;customs
+das;Visum;visa
+der;Flug;flight
+der;Charakter;character
+die;Eigenschaft;quality / characteristic
+die;Enttäuschung;disappointment
+die;Hoffnung;hope
+der;Mut;courage
+die;Nervosität;nervousness
+die;Persönlichkeit;personality
+der;Stolz;pride
+die;Stimmung;mood / atmosphere
+das;Vertrauen;trust / confidence
+die;Überraschung;surprise
+das;Interesse;interest
+die;Geduld;patience
+die;Atmosphäre;atmosphere
+die;Energie;energy
+das;Klima;climate
+der;Müll;trash / garbage
+die;Quelle;source / spring
+der;Rohstoff;raw material
+der;Schutz;protection
+die;Umwelt;environment
+die;Verschmutzung;pollution
+das;Wachstum;growth
+die;Wüste;desert
+der;Dschungel;jungle
+der;Ozean;ocean
+die;Absicht;intention
+die;Bedeutung;meaning / significance
+die;Bedingung;condition
+der;Beweis;proof / evidence
+die;Beziehung;relationship
+der;Einfluß;influence
+die;Einheit;unity / unit
+die;Entscheidung;decision
+die;Entwicklung;development
+der;Erfolg;success
+die;Erinnerung;memory
+die;Freiheit;freedom
+die;Gelegenheit;opportunity
+die;Gewohnheit;habit
+der;Grundsatz;principle
+die;Herausforderung;challenge
+der;Konflikt;conflict
+die;Kritik;criticism
+die;Lage;situation / location
+die;Möglichkeit;possibility
+die;Realität;reality
+die;Rolle;role
+die;Sicherheit;safety / security
+der;Sinn;sense / meaning
+die;Situation;situation
+das;System;system
+die;Tatsache;fact
+der;Trend;trend
+die;Ursache;cause
+das;Verhalten;behavior
+das;Verständnis;understanding
+der;Vorteil;advantage
+der;Nachteil;disadvantage
+der;Wert;value
+die;Wirkung;effect
+die;Wissenschaft;science
+das;Wissen;knowledge
+der;Zweck;purpose
+der;Zweifel;doubt
+der;Zusammenhang;connection / context
+der;Abfall;waste / trash
+das;Abenteuer;adventure
+der;Abschluss;conclusion / graduation
+der;Abstand;distance
+der;Acker;field (agricultural)
+die;Aktie;share / stock
+der;Albtraum;nightmare
+der;Alltag;everyday life
+das;Alter;age
+das;Angebot;offer
+der;Anhänger;trailer / supporter
+die;Anlage;facility / park / attachment
+der;Anlass;occasion / reason
+die;Anmeldung;registration
+der;Anspruch;claim / demand
+der;Anteil;share / portion
+der;Antrag;application / proposal
+der;Applaus;applause
+der;Ärger;trouble / anger
+der;Artikel;article
+der;Aspekt;aspect
+der;Auftrag;order / task / mission
+der;Ausdruck;expression / printout
+die;Ausgabe;expense / edition
+der;Ausgang;exit
+die;Aussage;statement
+die;Aussicht;view / prospect
+die;Auswahl;selection / choice
+der;Autor;author
+die;Band;band / tape / volume
+der;Bedarf;need / demand
+der;Beitrag;contribution
+der;Bereich;area / field
+der;Besitz;possession / property
+der;Besuch;visit
+der;Betrag;amount / sum
+der;Betrieb;company / business
+die;Bewegung;movement
+der;Bezirk;district
+die;Bildung;education
+die;Bühne;stage
+die;Chance;chance
+der;Christ;Christian
+der;Club;club
+der;Dank;thanks
+die;Darstellung;representation / portrayal
+die;Debatte;debate
+die;Distanz;distance
+der;Druck;pressure / printing
+der;Durchschnitt;average
+die;Ecke;corner
+die;Ehre;honor
+der;Eindruck;impression
+der;Einsatz;commitment / use / mission
+die;Einstellung;attitude / hiring
+der;Eintritt;entry / admission
+das;Element;element
+der;Empfang;reception
+das;Ergebnis;result
+die;Erlaubnis;permission
+die;Ernährung;nutrition / diet
+die;Erwartung;expectation
+die;Existenz;existence
+der;Experte;expert (male)
+die;Expertin;expert (female)
+der;Faktor;factor
+der;Fall;case / fall
+die;Fähigkeit;ability / skill
+die;Fantasie;imagination
+die;Figur;figure / character
+die;Fläche;area / surface
+die;Flucht;escape / flight
+die;Folge;consequence / episode
+die;Forderung;demand / claim
+die;Forschung;research
+der;Fortschritt;progress
+die;Funktion;function
+die;Gegend;area / region
+der;Gegner;opponent
+das;Geheimnis;secret
+der;Geist;spirit / mind / ghost
+die;Generation;generation
+das;Gericht;court / dish (meal)
+die;Geste;gesture
+die;Gewalt;violence / force
+der;Gewinn;profit / win
+der;Glaube;faith / belief
+das;Gleichgewicht;balance
+das;Glück;happiness / luck
+die;Grundlage;basis / foundation
+die;Gruppe;group
+die;Haltung;attitude / posture
+der;Haushalt;household / budget
+die;Heimat;homeland / home
+der;Hinweis;hint / clue
+der;Hintergrund;background
+die;Hitze;heat
+der;Horizont;horizon
+der;Humor;humor
+der;Inhalt;content
+die;Initiative;initiative
+der;Irrtum;error / mistake
+der;Journalist;journalist
+die;Jugend;youth
+der;Kampf;fight / struggle
+das;Kapitel;chapter
+die;Katastrophe;catastrophe
+die;Kenntnis;knowledge
+die;Kette;chain / necklace
+die;Klage;complaint / lawsuit
+der;Klang;sound
+die;Kommunikation;communication
+der;Kompromiss;compromise
+die;Konferenz;conference
+die;Konkurrenz;competition
+der;Kontakt;contact
+die;Kontrolle;control
+das;Konzept;concept
+der;Konzern;concern / corporate group
+die;Kraft;strength / power
+der;Kreis;circle / district
+die;Krise;crisis
+die;Kultur;culture
+die;Leidenschaft;passion
+die;Leistung;performance / achievement
+die;Leitung;leadership / management / pipe
+die;Linie;line
+die;Liste;list
+die;Lüge;lie
+die;Masse;mass / crowd
+die;Maßnahme;measure / action
+das;Material;material
+die;Menge;amount / quantity
+die;Methode;method
+der;Mitarbeiter;employee / colleague
+die;Mitte;middle / center
+das;Mitleid;pity / compassion
+das;Modell;model
+der;Moment;moment
+der;Mord;murder
+das;Motiv;motive
+der;Muskel;muscle
+der;Nachweis;proof / evidence
+die;Nähe;proximity / closeness
+die;Nahrung;food / nutrition
+der;Nerv;nerve
+das;Niveau;level / standard
+die;Norm;norm / standard
+die;Notwendigkeit;necessity
+das;Objekt;object
+das;Opfer;victim / sacrifice
+die;Option;option
+die;Ordnung;order
+das;Organ;organ
+die;Organisation;organization
+das;Paar;pair / couple
+der;Patient;patient
+die;Phase;phase
+die;Philosophie;philosophy
+die;Planung;planning
+die;Position;position
+das;Potenzial;potential
+die;Praxis;practice / doctor's office
+das;Prinzip;principle
+die;Priorität;priority
+die;Produktion;production
+das;Produkt;product
+der;Profi;professional
+das;Profil;profile
+der;Prozess;process / trial
+das;Publikum;audience
+der;Punkt;point / dot
+die;Qualität;quality
+der;Rahmen;frame / framework
+die;Reaktion;reaction
+der;Rat;advice / council
+die;Reform;reform
+die;Reihe;row / series
+die;Religion;religion
+das;Risiko;risk
+die;Routine;routine
+der;Ruhm;fame / glory
+die;Runde;round / circle (of people)
+der;Schaden;damage
+der;Schatten;shadow
+der;Schatz;treasure
+die;Schicht;layer / shift (work)
+der;Schicksal;fate / destiny
+der;Schlaf;sleep
+der;Schlag;hit / blow
+der;Schluss;end / conclusion
+der;Schritt;step
+die;Schuld;debt / guilt
+die;Schwäche;weakness
+der;Schwerpunkt;focus / main emphasis
+die;Schwierigkeit;difficulty
+der;Sektor;sector
+die;Seele;soul
+die;Sitzung;meeting / session
+der;Sieg;victory
+der;Soldat;soldier
+die;Sorge;worry / care
+der;Spaß;fun
+der;Sprecher;speaker
+der;Standard;standard
+der;Standort;location / site
+der;Standpunkt;point of view
+die;Stärke;strength
+der;Start;start
+die;Statistik;statistic
+der;Staub;dust
+die;Stelle;place / position
+die;Stille;silence
+die;Struktur;structure
+die;Stufe;step / level
+die;Substanz;substance
+die;Suche;search
+das;Symbol;symbol
+die;Szene;scene
+das;Talent;talent
+der;Täter;perpetrator
+die;Tätigkeit;activity / occupation
+die;Technik;technology / technique
+die;Technologie;technology
+der;Teilnehmer;participant
+das;Tempo;speed / pace
+die;Tendenz;tendency / trend
+der;Terror;terror
+das;Thema;topic / theme
+die;Theorie;theory
+der;Titel;title
+der;Ton;sound / tone / clay
+die;Tradition;tradition
+der;Trainer;coach / trainer
+die;Träne;tear (crying)
+der;Typ;type / guy
+die;Übung;exercise / practice
+das;Ufer;shore / bank
+der;Umgang;handling / interaction
+die;Umgebung;surroundings / environment
+der;Umsatz;turnover / revenue
+der;Umstand;circumstance
+der;Unfall;accident
+der;Untergang;downfall / sinking
+die;Unterhaltung;entertainment / conversation
+der;Unternehmer;entrepreneur
+der;Ursprung;origin
+das;Urteil;judgment / verdict
+die;Variante;variant
+die;Verantwortung;responsibility
+der;Verbraucher;consumer
+das;Verbrechen;crime
+der;Verdacht;suspicion
+der;Vergleich;comparison
+das;Vergnügen;pleasure / enjoyment
+das;Verhältnis;relationship / ratio
+der;Verkehr;traffic
+der;Verlag;publishing house
+der;Verlust;loss
+das;Vermögen;fortune / assets / ability
+die;Vernunft;reason / common sense
+die;Version;version
+der;Versuch;attempt / experiment
+der;Vertreter;representative
+die;Verwaltung;administration
+der;Verwandte;relative
+der;Vorschlag;suggestion / proposal
+die;Vorsicht;caution / care
+der;Vorstand;board / executive committee
+die;Vorstellung;idea / performance / introduction
+der;Vorwurf;accusation / reproach
+die;Waffe;weapon
+die;Wahrheit;truth
+die;Währung;currency
+der;Wandel;change / transformation
+die;Ware;goods / merchandise
+die;Warnung;warning
+die;Weise;way / manner
+die;Werbung;advertisement
+der;Wettbewerb;competition
+der;Widerspruch;contradiction
+der;Widerstand;resistance
+der;Wille;will
+die;Wirklichkeit;reality
+die;Wurzel;root
+die;Zahl;number
+das;Zeichen;sign / symbol
+der;Zeuge;witness
+das;Ziel;goal / aim
+die;Zone;zone
+der;Zufall;coincidence / chance
+die;Zustimmung;agreement / consent
+der;Zwang;compulsion / force
+die;Abbildung;illustration
+der;Aberglaube;superstition
+der;Ablauf;process / procedure
+die;Abreise;departure
+der;Absatz;paragraph / heel / sales
+der;Abschied;farewell
+die;Achtung;attention / respect
+die;Akademie;academy
+der;Akzent;accent
+die;Alternative;alternative
+das;Amt;office / agency
+die;Analyse;analysis
+der;Anbieter;provider
+der;Anblick;sight / view
+das;Andenken;souvenir
+der;Anfangsbuchstabe;initial letter
+die;Angabe;information / statement
+der;Angel;fishing rod
+die;Angelegenheit;matter / affair
+der;Angriff;attack
+die;Anhöhe;hill / high ground
+die;Anklage;accusation / charge
+die;Anschrift;address
+die;Ansicht;view / opinion
+die;Anzahl;number / quantity
+die;Anzeige;advertisement / report
+der;Äquator;equator
+das;Argument;argument
+die;Armut;poverty
+das;Aroma;aroma
+die;Asche;ash
+der;Ast;branch
+der;Atem;breath
+der;Athlet;athlete
+der;Aufbau;structure / construction
+der;Aufenthalt;stay / residence
+die;Aufführung;performance
+die;Aufgabe;task / problem
+der;Aufkleber;sticker
+die;Aufnahme;recording / admission
+der;Aufregung;excitement
+der;Aufruf;call / appeal
+der;Aufschwung;upswing / recovery
+der;Auftritt;appearance / performance
+der;Augenblick;moment
+die;Auktion;auction
+der;Ausbau;expansion / development
+der;Ausblick;outlook / view
+der;Ausflug;excursion / trip
+die;Ausrede;excuse
+die;Ausrüstung;equipment
+die;Aussprache;pronunciation
+das;Aussehen;appearance / looks
+der;Austausch;exchange
+die;Autobahn;highway / motorway
+der;Automat;vending machine
+die;Backware;baked goods
+die;Bahn;path / track / train
+der;Bahnsteig;platform (train)
+die;Bande;gang
+der;Bandit;bandit
+die;Banknote;banknote
+das;Bargeld;cash
+die;Basis;base / basis
+der;Bauer;farmer
+der;Bauernhof;farm
+der;Baukasten;construction set
+der;Baumstamm;tree trunk
+die;Beachtung;attention / observance
+der;Beamte;civil servant / official
+der;Becher;cup / beaker
+das;Becken;basin / pool / pelvis
+die;Bedienung;service / waiter/waitress
+der;Befehl;command / order
+der;Begriff;term / concept
+die;Begründung;reasoning / justification
+die;Begrüßung;greeting
+die;Behörde;authority / agency
+der;Beifall;applause
+das;Beil;hatchet
+die;Beilage;side dish / enclosure
+das;Beileid;condolence
+die;Bemerkung;remark / comment
+das;Benzin;gasoline / petrol
+der;Beobachter;observer
+die;Beobachtung;observation
+die;Beratung;consultation / advice
+die;Berechnung;calculation
+die;Bereitschaft;readiness
+der;Bergsteiger;mountaineer
+der;Bericht;report
+die;Berühmtheit;fame / celebrity
+der;Bescheid;notification / information
+die;Bescherung;giving of presents (Christmas)
+die;Beschwerde;complaint
+die;Besetzung;cast (of a play) / occupation
+der;Besitz;property / possession
+die;Besonderheit;special feature / peculiarity
+die;Besserung;improvement / recovery
+der;Bestand;stock / inventory
+die;Bestätigung;confirmation
+der;Besucher;visitor
+die;Beteiligung;participation
+der;Betrug;fraud / deception
+das;Bettzeug;bedding
+die;Bevölkerung;population
+der;Bewerber;applicant
+das;Bewusstsein;consciousness / awareness
+die;Bibel;bible
+der;Dieb;thief
+der;Dienst;service / duty
+der;Dichter;poet
+der;Dolmetscher;interpreter
+die;Dosis;dose
+das;Drama;drama
+der;Drehbuch;screenplay
+die;Droge;drug
+die;Drohung;threat
+die;Dummheit;stupidity
+der;Dünger;fertilizer
+die;Durchsage;announcement
+der;Durst;thirst
+die;Dynamik;dynamics
+die;Ebbe;low tide
+die;Ebene;plain / level
+das;Echo;echo
+die;Ehe;marriage
+der;Ehemann;husband
+die;Ehefrau;wife
+das;Ehepaar;married couple
+die;Eifersucht;jealousy
+der;Eigentümer;owner
+das;Eigentum;property
+die;Eile;hurry
+der;Einbrecher;burglar
+der;Einbruch;burglary / collapse
+die;Einfahrt;driveway / entrance
+der;Einfall;idea / notion
+der;Eingang;entrance
+die;Einladung;invitation
+die;Einnahme;revenue / income / intake
+die;Einrichtung;furnishing / institution
+der;Eintopf;stew
+der;Einwand;objection
+der;Einzelhandel;retail
+die;Einzelheit;detail
+das;Elend;misery
+der;Empfänger;recipient / receiver
+die;Empfehlung;recommendation
+der;Enkel;grandchild / grandson
+die;Enkelin;granddaughter
+die;Entdeckung;discovery
+die;Ente;duck
+die;Entfernung;distance
+die;Entlassung;dismissal / discharge
+die;Entschuldigung;apology / excuse
+die;Entstehung;origin / formation
+das;Erdbeben;earthquake
+das;Erdgeschoss;ground floor
+das;Ereignis;event
+die;Erfindung;invention
+die;Erfüllung;fulfillment
+die;Ergänzung;addition / supplement
+die;Erholung;recreation / recovery
+die;Erklärung;explanation / declaration
+die;Erkältung;cold (illness)
+das;Erlebnis;experience
+die;Ermordung;murder / assassination
+der;Ernst;seriousness
+die;Ernte;harvest
+der;Ersatz;substitute / replacement
+die;Erscheinung;appearance / phenomenon
+der;Erwachsene;adult
+der;Esel;donkey
+die;Fähre;ferry
+der;Fahrer;driver
+das;Fahrzeug;vehicle
+der;Falke;falcon
+die;Falle;trap
+die;Falte;wrinkle / fold
+die;Familie;family
+der;Fan;fan
+der;Fasching;carnival
+die;Fassade;facade
+das;Fass;barrel
+die;Faust;fist
+der;Favorit;favorite
+das;Fazit;conclusion
+die;Feder;feather / spring
+die;Fee;fairy
+der;Feierabend;end of the workday
+die;Feier;celebration
+der;Feind;enemy
+das;Feld;field
+der;Fels;rock
+das;Fernglas;binoculars
+die;Ferien;vacation / holidays
+die;Fessel;shackle / fetter
+die;Festplatte;hard drive
+das;Feuerzeug;lighter
+die;Filiale;branch
+der;Filter;filter
+der;Finanzminister;finance minister
+die;Finanzen;finances
+der;Fingerhut;thimble
+die;Firma;company
+die;Flagge;flag
+die;Flamme;flame
+der;Fleck;stain / spot
+die;Fledermaus;bat
+das;Fließband;assembly line
+der;Flirt;flirtation
+das;Armband;bracelet
+die;Halskette;necklace
+der;Ohrring;earring
+der;Ring;ring
+die;Brosche;brooch
+das;Tuch;cloth / scarf
+das;Portemonnaie;wallet
+der;Regenschirm;umbrella
+die;Sonnenbrille;sunglasses
+der;Radiergummi;eraser
+das;Lineal;ruler
+der;Spitzer;pencil sharpener
+die;Schere;scissors
+der;Kleber;glue
+der;Hefter;stapler
+der;Locher;hole punch
+die;Klammer;clip / staple
+der;Zirkel;compass (for circles)
+der;Globus;globe
+die;Karte;map / card
+das;Wörterbuch;dictionary
+die;Tafel;blackboard
+die;Kreide;chalk
+der;Schwamm;sponge
+der;Sturm;storm
+das;Gewitter;thunderstorm
+der;Blitz;lightning
+der;Donner;thunder
+der;Hagel;hail
+der;Nebel;fog
+der;Frost;frost
+das;Glatteis;black ice
+der;Regenbogen;rainbow
+die;Temperatur;temperature
+der;Grad;degree
+die;Kälte;cold
+der;Sonnenschein;sunshine
+der;Samen;seed
+der;Stamm;trunk / stem
+die;Knospe;bud
+die;Blüte;blossom
+die;Frucht;fruit
+der;Pilz;mushroom
+das;Moos;moss
+das;Unkraut;weed
+die;Hecke;hedge
+der;Strauch;bush / shrub
+die;Gießkanne;watering can
+die;Harke;rake
+der;Spaten;spade
+die;Schubkarre;wheelbarrow
+der;Kompost;compost
+das;Gewächshaus;greenhouse
+der;Zaun;fence
+das;Tor;gate
+der;Rasen;lawn
+die;Flasche;bottle
+die;Dose;can / tin
+die;Kiste;box / crate
+der;Karton;cardboard box
+der;Eimer;bucket
+der;Korb;basket
+der;Sack;sack / bag
+der;Beutel;bag / pouch
+die;Tüte;bag (plastic/paper)
+die;Schachtel;box (small)
+der;Anwalt;lawyer
+der;Architekt;architect
+der;Bäcker;baker
+der;Elektriker;electrician
+der;Feuerwehrmann;firefighter
+der;Frisör;hairdresser
+der;Ingenieur;engineer
+der;Installateur;plumber
+der;Kellner;waiter
+der;Koch;cook / chef
+der;Künstler;artist
+der;Maler;painter
+der;Mechaniker;mechanic
+der;Metzger;butcher
+der;Musiker;musician
+der;Pilot;pilot
+der;Polizist;policeman
+der;Richter;judge
+der;Schauspieler;actor
+der;Schneider;tailor
+der;Schriftsteller;writer
+der;Tischler;carpenter
+der;Verkäufer;salesperson
+der;Wissenschaftler;scientist
+der;Adel;nobility
+der;Adler;eagle
+die;Ader;vein
+der;Agent;agent
+die;Agentur;agency
+die;Aggression;aggression
+die;Ahnung;idea / clue
+die;Aktion;campaign / action
+der;Aktivist;activist
+die;Aktivität;activity
+das;Album;album
+die;Alge;alga
+der;Alkohol;alcohol
+die;Allergie;allergy
+der;Altar;altar
+das;Altersheim;nursing home
+die;Ambulanz;ambulance
+der;Ameisenhaufen;anthill
+das;Amulett;amulet
+der;Anästhesist;anesthetist
+der;Anbau;cultivation / extension
+das;Ansehen;reputation
+die;Ansichtskarte;picture postcard
+der;Anstand;decency
+die;Antenne;antenna
+die;Antike;antiquity
+der;Antiquar;antiquarian
+das;Apartment;apartment
+der;Apparat;apparatus / device
+der;Appetit;appetite
+der;Arbeitsplatz;workplace
+das;Archiv;archive
+die;Arena;arena
+das;Arrangement;arrangement
+die;Artikulation;articulation
+die;Arznei;medicine
+die;Assistenz;assistance
+der;Astrologe;astrologer
+der;Astronaut;astronaut
+der;Astronom;astronomer
+das;Asyl;asylum
+das;Atelier;studio
+die;Attraktion;attraction
+das;Attribut;attribute
+die;Aufmerksamkeit;attention
+der;Auflauf;casserole / crowd
+die;Auflage;circulation / edition / condition
+die;Auflösung;dissolution / resolution
+die;Aufmunterung;encouragement
+der;Aufruhr;uproar / riot
+der;Aufzug;elevator
+das;Ausland;abroad
+der;Ausländer;foreigner
+die;Ausnahme;exception
+der;Auspuff;exhaust pipe
+der;Bach;brook / stream
+die;Bakterie;bacterium
+der;Ballon;balloon
+das;Ballett;ballet
+der;Bambus;bamboo
+der;Bankier;banker
+der;Bankrott;bankruptcy
+das;Banner;banner
+der;Barbar;barbarian
+die;Barriere;barrier
+der;Bart;beard
+die;Basis;base
+die;Batterie;battery
+der;Bau;construction / building
+die;Bauchspeicheldrüse;pancreas
+der;Befürworter;supporter
+die;Begabung;talent
+die;Begegnung;encounter
+die;Begeisterung;enthusiasm
+das;Begräbnis;funeral
+die;Behandlung;treatment
+der;Behälter;container
+die;Behauptung;claim / assertion
+das;Beil;axe
+der;Belag;topping / coating
+die;Belastung;burden / strain
+die;Beleidigung;insult
+die;Belohnung;reward
+der;Benutzer;user
+das;Beruhigungsmittel;sedative
+der;Besen;broom
+der;Beton;concrete
+der;Biber;beaver
+die;Bindung;bond / tie
+die;Biographie;biography
+der;Biologe;biologist
+die;Birke;birch tree
+die;Birne;pear / light bulb
+der;Bischof;bishop
+der;Biss;bite
+die;Bitte;request
+das;Blasrohr;blowpipe
+die;Blase;bubble / blister
+das;Blech;sheet metal
+der;Block;block
+die;Blockade;blockade
+die;Blondine;blonde woman
+die;Blütezeit;heyday / flowering season
+der;Blutdruck;blood pressure
+die;Blutgruppe;blood type
+der;Bodenbelag;flooring
+der;Bodenschatz;mineral resource
+der;Bogen;bow / arch / sheet (paper)
+die;Bohne;bean
+die;Boje;buoy
+die;Bombe;bomb
+der;Bonbon;candy
+die;Bordkarte;boarding pass
+der;Börsianer;stockbroker
+die;Böschung;embankment
+der;Botaniker;botanist
+die;Botschaft;embassy / message
+der;Botschafter;ambassador
+der;Boxer;boxer
+die;Branche;branch / industry sector
+der;Brand;fire
+der;Braten;roast
+die;Brauerei;brewery
+das;Brautpaar;bridal couple
+die;Brechstange;crowbar
+die;Bremse;brake
+das;Brettspiel;board game
+die;Briefmarke;postage stamp
+der;Briefträger;mailman
+der;Briefumschlag;envelope
+die;Brigade;brigade
+die;Bronze;bronze
+die;Broschüre;brochure
+der;Brunnen;fountain / well
+die;Brust;chest / breast
+das;Bruttoinlandsprodukt;Gross Domestic Product (GDP)
+die;Buche;beech tree
+die;Bucht;bay
+das;Budget;budget
+das;Buffet;buffet
+der;Bulle;bull / cop (slang)
+der;Bundeskanzler;Federal Chancellor
+der;Bunker;bunker
+die;Bürde;burden
+der;Bürgersteig;sidewalk
+das;Cabrio;convertible car
+der;Campingplatz;campsite
+die;Couch;couch
+der;Champagner;champagne
+der;Champion;champion
+das;Chaos;chaos
+der;Chemiker;chemist
+der;Chirurg;surgeon
+der;Chor;choir
+der;Chronist;chronicler
+die;Chronologie;chronology
+der;Clown;clown
+der;Code;code
+der;Cognac;cognac
+der;Comic;comic
+der;Container;container
+die;Creme;cream
+der;Dachs;badger
+die;Dattel;date (fruit)
+der;Deckel;lid
+die;Dekoration;decoration
+der;Delegierte;delegate
+das;Delikt;offense / crime
+der;Delfin;dolphin
+der;Demonstrant;protester
+die;Demonstration;demonstration
+das;Denkmal;monument
+das;Deodorant;deodorant
+die;Depression;depression
+das;Design;design
+das;Dessert;dessert
+das;Detail;detail
+der;Detektiv;detective
+das;Dezimal;decimal
+die;Diagnose;diagnosis
+das;Diagramm;diagram
+der;Dialekt;dialect
+der;Dialog;dialogue
+die;Diät;diet
+der;Diebstahl;theft
+der;Diktator;dictator
+das;Diktat;dictation
+das;Dilemma;dilemma
+der;Dinosaurier;dinosaur
+die;Diözese;diocese
+das;Diplom;diploma
+der;Diplomat;diplomat
+die;Direktion;management / director's office
+der;Dirigent;conductor (music)
+die;Disziplin;discipline
+die;Distel;thistle
+der;Domino;domino
+die;Doppelhaushälfte;semi-detached house
+der;Docht;wick
+der;Drache;dragon
+der;Draht;wire
+das;Drehbuch;script
+die;Drogerie;drugstore
+die;Düne;dune
+der;Durchfall;diarrhea
+die;Eiche;oak
+die;Eidechse;lizard
+der;Eid;oath
+der;Eierbecher;egg cup
+das;Eigelb;egg yolk
+der;Einband;book cover
+die;Einbildung;imagination
+die;Einbuße;loss / reduction
+die;Einfuhr;import
+die;Eingeweide;guts / intestines
+der;Einkauf;purchase
+der;Einkaufswagen;shopping cart
+die;Eintracht;harmony
+das;Einverständnis;consent
+der;Einwanderer;immigrant
+der;Einwohner;inhabitant
+die;Einzahlung;deposit
+das;Eiweiß;egg white / protein
+der;Ekel;disgust
+der;Elan;zest / enthusiasm
+das;Elementarteilchen;elementary particle
+der;Ellbogen;elbow
+die;Elite;elite
+die;Emotion;emotion
+der;Emigrant;emigrant
+die;Energiequelle;energy source
+das;Engagement;commitment
+der;Engel;angel
+die;Epidemie;epidemic
+die;Epoche;epoch / era
+die;Erbse;pea
+das;Erdgas;natural gas
+das;Erdöl;petroleum / crude oil
+der;Eremit;hermit
+der;Erlös;proceeds / revenue
+die;Erosion;erosion
+die;Eruption;eruption
+der;Erzähler;narrator
+die;Erziehung;education / upbringing
+der;Essay;essay
+die;Essenz;essence
+die;Etage;floor / story
+die;Etappe;stage / leg (of a journey)
+der;Etat;budget
+die;Ethik;ethics
+das;Etikett;label
+die;Etikette;etiquette
+die;Eule;owl
+die;Evolution;evolution
+die;Exzellenz;excellence
+der;Exzess;excess
+das;Fabeltier;mythical creature
+die;Fachkraft;specialist
+der;Faden;thread
+der;Fahrgast;passenger
+der;Fahrplan;schedule / timetable
+die;Fahrspur;lane (traffic)
+die;Fahrt;journey / ride / drive
+der;Fakultät;faculty / department
+die;Falte;fold / wrinkle
+der;Farn;fern
+die;Faser;fiber
+die;Fastenzeit;Lent
+die;Faulheit;laziness
+der;Fechter;fencer
+die;Feige;fig / coward
+der;Feigling;coward
+die;Feile;file (tool)
+der;Feinschmecker;gourmet
+das;Fensterbrett;windowsill
+der;Festtag;holiday
+die;Festung;fortress
+die;Fichte;spruce
+der;Filz;felt
+der;Fink;finch
+die;Finsternis;darkness / eclipse
+die;Flosse;fin
+die;Flöte;flute
+die;Flotte;fleet
+der;Fluch;curse
+die;Flut;flood / high tide
+der;Fokus;focus
+die;Fontäne;fountain
+der;Förster;forester
+die;Forelle;trout
+das;Format;format
+die;Formel;formula
+der;Forscher;researcher
+das;Forum;forum
+das;Fossil;fossil
+der;Fotograf;photographer
+das;Foyer;foyer / lobby
+die;Fracht;freight / cargo
+der;Fragebogen;questionnaire
+das;Fragment;fragment
+der;Fräser;milling cutter
+die;Fresse;gob / maw (vulgar for mouth)
+der;Friede;peace
+der;Friseur;hairdresser 
