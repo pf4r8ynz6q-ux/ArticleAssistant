@@ -1,14 +1,19 @@
 # German Article Assistant
 
-A command-line flashcard tool designed to help practice and master German noun articles (`der`, `die`, `das`).
+A command-line flashcard tool designed to help practice and master German noun articles across grammatical cases: **Nominativ** (`der`, `die`, `das`), **Akkusativ** (`den`, `die`, `das`), and **Dativ** (`dem`, `der`, `den`).
 
 ## Features
 
+- **Multi-Case Practice**: Learn articles across Nominativ, Akkusativ, and Dativ with case-appropriate article options and plural forms.
 - **Bite-sized Sessions**: Each quiz presents 20 randomized, non-repeating nouns from your vocabulary list.
-- **Flexible Input**: Answer using quick number keys (`1` = *der*, `2` = *die*, `3` = *das*) or by typing the article directly.
-- **Progress & Error Logging**: Quiz results are automatically logged in JSON Lines format to `results.txt`, including dates, accuracy scores, and the specific nouns answered incorrectly.
+- **Flexible Input**: Answer using quick number keys (`1`, `2`, `3`) or by typing the article directly.
+- **Consolidated SQLite History**: All session summaries and granular question-by-question attempts are persisted into case-specific tables within a single `quiz_history.db`.
+- **Targeted Review Mode**: Reinforce troubled words per case based on historical accuracy and error streaks, with automated graduation as proficiency improves.
+- **Interactive Main Menu**: Launch without flags to access standard quizzes, review queues with active word counts, and comparative statistics.
+- **In-Depth KPI Reporting**: View comparative cross-case overviews, article-level accuracy percentages, top troubled nouns, and frequent article confusion patterns.
+- **Automatic Legacy Migration**: Automatically detects and migrates legacy JSON-line results logs (`results.txt`, `results_akkusativ.txt`, `results_dativ.txt`) into SQLite.
 - **Replay Option**: Prompt to instantly start another round or exit after viewing session totals.
-- **Custom Vocabulary**: Defaults to `articles.txt`, with support for custom flashcard files via CLI argument.
+- **Custom Vocabulary**: Supports custom semicolon-delimited flashcard files via command-line arguments.
 
 ## Requirements
 
@@ -17,9 +22,22 @@ A command-line flashcard tool designed to help practice and master German noun a
 
 ## Getting Started
 
-### 1. Run with default vocabulary
+### 1. Run Interactive Menu (Default)
 
-Launch the quiz using the included `articles.txt` list:
+Launch the assistant with the default vocabulary and interactive menu:
+
+```text
+=== German Grammar Assistant ===
+  1. Nominativ Quiz (der / die / das)
+  2. Akkusativ Quiz (den / die / das)
+  3. Dativ Quiz (dem / der / den)
+  4. Review Quiz (Struggling Nouns)
+  5. View Stats (KPIs)
+  6. Exit
+Choice:
+```
+
+Run via:
 
 ```bash
 python article_assist.py
