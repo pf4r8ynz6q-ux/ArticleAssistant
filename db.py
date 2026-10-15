@@ -2,11 +2,15 @@
 from __future__ import annotations
 import json
 from pathlib import Path
+import random
 import sqlite3
+import string
 
 from config import Config
 
 COLORS = Config.COLORS
+TOKEN_CHARS = string.ascii_uppercase + string.digits
+TOKEN_LENGTH = 4
 
 
 def _get_table_names(case: str = "nominativ") -> tuple[str, str]:
@@ -26,6 +30,37 @@ def _table_exists(cursor: sqlite3.Cursor, table_name: str) -> bool:
     return cursor.fetchone() is not None
 
 
+def _has_token_column(cursor: sqlite3.Cursor, sessions_table: str) -> bool:
+    """Checks whether a sessions table has the token column."""
+    if not _table_exists(cursor, sessions_table):
+        return False
+    cursor.execute(f"PRAGMA table_info({sessions_table})")
+    return "token" in {row[1] for row in cursor.fetchall()}
+
+
+def _generate_token_with_cursor(cursor: sqlite3.Cursor) -> str:
+    """Generates a unique 4-character alphanumeric token using an active cursor."""
+    existing: set[str] = set()
+    for case_key in Config.CASE_CONFIGS:
+        sessions_table, _ = _get_table_names(case_key)
+        if _has_token_column(cursor, sessions_table):
+            cursor.execute(f"SELECT UPPER(token) FROM {sessions_table}")
+            existing.update(row[0] for row in cursor.fetchall() if row[0])
+
+    while True:
+        candidate = "".join(random.choices(TOKEN_CHARS, k=TOKEN_LENGTH))
+        if candidate not in existing:
+            return candidate
+
+
+def generate_unique_token(db_path: Path) -> str:
+    """Generates a 4-character alphanumeric token unique across all quiz sessions."""
+    if not db_path.is_file():
+        return "".join(random.choices(TOKEN_CHARS, k=TOKEN_LENGTH))
+    with sqlite3.connect(db_path) as conn:
+        return _generate_token_with_cursor(conn.cursor())
+
+
 def init_db(db_path: Path, case: str = "nominativ") -> None:
     """Initializes SQLite database schema for sessions, card attempts, and metadata."""
     sessions_table, attempts_table = _get_table_names(case)
@@ -40,10 +75,21 @@ def init_db(db_path: Path, case: str = "nominativ") -> None:
             ):
                 if _table_exists(cursor, old_table) and not _table_exists(cursor, new_table):
                     cursor.execute(f"ALTER TABLE {old_table} RENAME TO {new_table}")
+
+        if _table_exists(cursor, sessions_table) and not _has_token_column(cursor, sessions_table):
+            cursor.execute(f"DROP TABLE IF EXISTS {attempts_table}")
+            cursor.execute(f"DROP TABLE IF EXISTS {sessions_table}")
+            if _table_exists(cursor, "meta"):
+                cursor.execute(
+                    "DELETE FROM meta WHERE key IN (?, 'results_txt_migrated')",
+                    (f"results_txt_migrated_{case}",),
+                )
+
         cursor.execute(
             f"""
             CREATE TABLE IF NOT EXISTS {sessions_table} (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+                token TEXT NOT NULL,
                 created_at TEXT NOT NULL,
                 total INTEGER NOT NULL,
                 correct INTEGER NOT NULL,
@@ -76,6 +122,29 @@ def init_db(db_path: Path, case: str = "nominativ") -> None:
             )
             """
         )
+        cursor.execute(
+            f"""
+            DELETE FROM {attempts_table}
+            WHERE session_id IN (
+                SELECT s.id FROM {sessions_table} s
+                WHERE s.quiz_mode = 'migrated'
+                  AND (
+                      SELECT COUNT(*) FROM {attempts_table} a
+                      WHERE a.session_id = s.id
+                  ) < s.total
+            )
+            """
+        )
+        cursor.execute(
+            f"""
+            DELETE FROM {sessions_table}
+            WHERE quiz_mode = 'migrated'
+              AND (
+                  SELECT COUNT(*) FROM {attempts_table} a
+                  WHERE a.session_id = {sessions_table}.id
+              ) < total
+            """
+        )
         conn.commit()
 
 
@@ -87,22 +156,34 @@ def _insert_migrated_record(
 ) -> None:
     """Inserts a single migrated legacy session record into the database."""
     sessions_table, attempts_table = _get_table_names(case)
+    token = str(data.get("token") or _generate_token_with_cursor(cursor)).upper()
     date_str = str(data.get("date", Config.current_timestamp()))
     total = int(data.get("total", 0))
     correct = int(data.get("right", 0))
+    right_nouns = data.get("right_nouns", [])
     wrong_nouns = data.get("wrong_nouns", [])
 
     cursor.execute(
         f"""
-        INSERT INTO {sessions_table} (created_at, total, correct, quiz_mode)
-        VALUES (?, ?, ?, 'migrated')
+        INSERT INTO {sessions_table} (token, created_at, total, correct, quiz_mode)
+        VALUES (?, ?, ?, ?, 'migrated')
         """,
-        (date_str, total, correct),
+        (token, date_str, total, correct),
     )
     session_id = cursor.lastrowid
 
-    if session_id is not None and wrong_nouns:
+    if session_id is not None and (right_nouns or wrong_nouns):
         attempts = [
+            (
+                session_id,
+                noun,
+                noun_to_article.get(noun, ""),
+                noun_to_article.get(noun, ""),
+                1,
+                date_str,
+            )
+            for noun in right_nouns
+        ] + [
             (session_id, noun, noun_to_article.get(noun, ""), "", 0, date_str)
             for noun in wrong_nouns
         ]
@@ -167,10 +248,11 @@ def save_db_session(
     mode: str,
     attempts: list[tuple[str, str, str, int, str]],
     case: str = "nominativ",
-) -> None:
+    token: str | None = None,
+) -> str:
     """Records full quiz session summary and individual card attempts in SQLite."""
     if not attempts:
-        return
+        return ""
 
     sessions_table, attempts_table = _get_table_names(case)
     total = len(attempts)
@@ -179,12 +261,13 @@ def save_db_session(
 
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
+        session_token = (token or _generate_token_with_cursor(cursor)).upper()
         cursor.execute(
             f"""
-            INSERT INTO {sessions_table} (created_at, total, correct, quiz_mode)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO {sessions_table} (token, created_at, total, correct, quiz_mode)
+            VALUES (?, ?, ?, ?, ?)
             """,
-            (created_at, total, correct, mode),
+            (session_token, created_at, total, correct, mode),
         )
         session_id = cursor.lastrowid
         if session_id is not None:
@@ -197,6 +280,7 @@ def save_db_session(
                 [(session_id, *attempt) for attempt in attempts],
             )
         conn.commit()
+    return session_token
 
 
 def get_troubled_nouns(
@@ -397,3 +481,97 @@ def display_kpis(
         _display_article_stats(cursor, attempts_table)
         _display_troubled_words(cursor, attempts_table)
     print()
+
+
+def get_all_sessions(
+    db_path: Path, case: str | None = None, limit: int = 50
+) -> list[tuple[str, str, str, str, int, int]]:
+    """Retrieves recent quiz sessions as (token, created_at, case, mode, correct, total)."""
+    if not db_path.is_file():
+        return []
+
+    cases = [case] if case in Config.CASE_CONFIGS else list(Config.CASE_CONFIGS.keys())
+    rows: list[tuple[str, str, str, str, int, int]] = []
+
+    with sqlite3.connect(db_path) as conn:
+        cursor = conn.cursor()
+        for case_key in cases:
+            sessions_table, _ = _get_table_names(case_key)
+            if not _has_token_column(cursor, sessions_table):
+                continue
+            cursor.execute(
+                f"""
+                SELECT token, created_at, quiz_mode, correct, total
+                FROM {sessions_table}
+                ORDER BY id DESC
+                LIMIT ?
+                """,
+                (limit,),
+            )
+            rows.extend(
+                (str(r[0]), str(r[1]), case_key, str(r[2]), int(r[3]), int(r[4]))
+                for r in cursor.fetchall()
+            )
+
+    rows.sort(key=lambda r: r[1], reverse=True)
+    return rows[:limit]
+
+
+def display_sessions(
+    db_path: Path, case: str | None = None
+) -> list[tuple[str, str, str, str, int, int]]:
+    """Displays a table of recorded quiz sessions with their 4-char retake tokens."""
+    sessions = get_all_sessions(db_path, case=case)
+    if not sessions:
+        print(
+            f"\n{COLORS.yellow}No recorded quiz sessions found. "
+            f"Complete a quiz first!{COLORS.reset}"
+        )
+        return []
+
+    print(f"\n{COLORS.cyan}=== Recorded Quiz Sessions ==={COLORS.reset}")
+    header = (
+        f"{'Token':<8} {'Date':<21} {'Case':<12} "
+        f"{'Mode':<14} {'Score':>9} {'Accuracy':>10}"
+    )
+    print(header)
+    print("-" * len(header))
+
+    for token, created_at, case_key, mode, correct, total in sessions:
+        case_name = Config.CASE_CONFIGS.get(case_key, {}).get("name", case_key.capitalize())
+        acc_str = f"{(correct / total) * 100:.1f}%" if total > 0 else "N/A"
+        score_str = f"{correct}/{total}"
+        print(
+            f"{COLORS.yellow}{token:<8}{COLORS.reset} {created_at:<21} "
+            f"{case_name:<12} {mode:<14} {score_str:>9} {acc_str:>10}"
+        )
+    print("-" * len(header) + "\n")
+    return sessions
+
+
+def get_quiz_by_token(db_path: Path, token: str) -> tuple[str, list[str]] | None:
+    """Looks up a quiz session by its 4-character token and returns (case, nouns)."""
+    clean_token = token.strip().upper()
+    if not clean_token or not db_path.is_file():
+        return None
+
+    with sqlite3.connect(db_path) as conn:
+        cursor = conn.cursor()
+        for case_key in Config.CASE_CONFIGS:
+            sessions_table, attempts_table = _get_table_names(case_key)
+            if not _has_token_column(cursor, sessions_table):
+                continue
+            cursor.execute(
+                f"SELECT id FROM {sessions_table} WHERE UPPER(token) = ? ORDER BY id DESC LIMIT 1",
+                (clean_token,),
+            )
+            row = cursor.fetchone()
+            if row is not None and _table_exists(cursor, attempts_table):
+                cursor.execute(
+                    f"SELECT noun FROM {attempts_table} WHERE session_id = ? ORDER BY id ASC",
+                    (row[0],),
+                )
+                nouns = [r[0] for r in cursor.fetchall()]
+                if nouns:
+                    return case_key, nouns
+    return None

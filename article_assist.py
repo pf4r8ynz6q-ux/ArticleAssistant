@@ -44,18 +44,22 @@ def load_cards(file_path: Path) -> list[Flashcard]:
     return cards
 
 
-def save_results(
+def save_results(  # pylint: disable=too-many-arguments,too-many-positional-arguments
     results_path: Path,
     correct: int,
     wrong: int,
     wrong_nouns: list[str],
+    right_nouns: list[str] | None = None,
+    token: str = "",
 ) -> None:
     """Appends quiz results to a results file for trend and progress reporting."""
     record = {
         "date": Config.current_timestamp(),
+        "token": token,
         "total": correct + wrong,
         "right": correct,
         "wrong": wrong,
+        "right_nouns": right_nouns if right_nouns is not None else [],
         "wrong_nouns": wrong_nouns,
     }
     with results_path.open("a", encoding="utf-8") as file:
@@ -151,53 +155,68 @@ def _prompt_card_choice(
         return options[answer]
 
 
-def _record_quiz_summary(
+def _record_quiz_summary(  # pylint: disable=too-many-arguments,too-many-positional-arguments
     target_results_path: Path,
     db_path: Path,
     mode: str,
     attempts: list[tuple[str, str, str, int, str]],
     case: str = "nominativ",
+    token: str = "",
 ) -> None:
     """Calculates and prints final score, then persists session to disk and database."""
     total = len(attempts)
     correct = sum(is_corr for _, _, _, is_corr, _ in attempts)
     wrong = total - correct
+    right_nouns = [noun for noun, _, _, is_corr, _ in attempts if is_corr]
     wrong_nouns = [noun for noun, _, _, is_corr, _ in attempts if not is_corr]
     percent = round((correct / total) * 100)
-    print(f"\n{COLORS.cyan}Quiz finished! Score: {correct} / {total} ({percent}%){COLORS.reset}")
-    save_results(target_results_path, correct, wrong, wrong_nouns)
-    db.save_db_session(db_path, mode, attempts, case=case)
+    saved_token = db.save_db_session(db_path, mode, attempts, case=case, token=token or None)
+    save_results(
+        target_results_path,
+        correct,
+        wrong,
+        wrong_nouns,
+        right_nouns=right_nouns,
+        token=saved_token,
+    )
+    print(
+        f"\n{COLORS.cyan}Quiz finished! Score: {correct} / {total} ({percent}%) "
+        f"| Token: {COLORS.yellow}{saved_token}{COLORS.reset}"
+    )
     print(
         f"{COLORS.dark_gray}Results saved to '{target_results_path.name}' "
-        f"and '{db_path.name}'.{COLORS.reset}"
+        f"and '{db_path.name}' (retake with token '{saved_token}').{COLORS.reset}"
     )
 
 
-def run_quiz_session(  # pylint: disable=too-many-arguments,too-many-positional-arguments
+def run_quiz_session(
     cards: list[Flashcard],
     target_results_path: Path,
     db_path: Path,
-    case_cfg: dict,
     mode: str = "standard",
     case: str = "nominativ",
 ) -> bool:
     """Executes a single quiz session and saves results. Returns False if user aborted."""
+    case_cfg = Config.CASE_CONFIGS.get(case, Config.CASE_CONFIGS["nominativ"])
     if mode == "review":
         quiz_cards = get_review_cards(cards, db_path, Config.QUIZ_LENGTH, case=case)
+    elif mode.startswith("retake"):
+        quiz_cards = random.sample(cards, len(cards))
     else:
         quiz_cards = random.sample(cards, min(Config.QUIZ_LENGTH, len(cards)))
 
+    token = db.generate_unique_token(db_path)
     attempts: list[tuple[str, str, str, int, str]] = []
     user_quit = False
 
     print(
         f"\n{COLORS.cyan}=== German Article Quiz ({case_cfg['name']}"
         f"{' - Review' if mode == 'review' else ''}, "
-        f"{len(quiz_cards)} questions) ==={COLORS.reset}"
+        f"{len(quiz_cards)} questions) [Token: {token}] ==={COLORS.reset}"
     )
-    prompt_hint = "/".join(str(i) for i in range(1, len(case_cfg["labels"]) + 1))
     print(
-        f"{COLORS.dark_gray}Select {prompt_hint} "
+        f"{COLORS.dark_gray}Select "
+        f"{'/'.join(str(i) for i in range(1, len(case_cfg['labels']) + 1))} "
         f"(or type article). Enter 'q' to quit.{COLORS.reset}\n"
     )
 
@@ -227,7 +246,7 @@ def run_quiz_session(  # pylint: disable=too-many-arguments,too-many-positional-
 
     if attempts:
         _record_quiz_summary(
-            target_results_path, db_path, mode, attempts, case=case
+            target_results_path, db_path, mode, attempts, case=case, token=token
         )
 
     return not user_quit
@@ -265,7 +284,13 @@ def prompt_main_menu() -> str | None:
         "review akkusativ": "review:akkusativ",
         "review:dativ": "review:dativ",
         "review dativ": "review:dativ",
-        "5": "stats",
+        "5": "sessions",
+        "sessions": "sessions",
+        "view sessions": "sessions",
+        "6": "retake",
+        "retake": "retake",
+        "retake quiz": "retake",
+        "7": "stats",
         "stats": "stats",
         "view stats": "stats",
     }
@@ -275,8 +300,10 @@ def prompt_main_menu() -> str | None:
         print("  2. Akkusativ Quiz (den / die / das)")
         print("  3. Dativ Quiz (dem / der / den)")
         print("  4. Review Quiz (Struggling Nouns)")
-        print("  5. View Stats (KPIs)")
-        print("  6. Exit")
+        print("  5. View Sessions (History & Retake)")
+        print("  6. Retake Quiz (by Token)")
+        print("  7. View Stats (KPIs)")
+        print("  8. Exit")
         try:
             choice = input("Choice: ").strip().lower()
         except (KeyboardInterrupt, EOFError):
@@ -285,9 +312,12 @@ def prompt_main_menu() -> str | None:
 
         if choice in menu_actions:
             return menu_actions[choice]
-        if choice in {"6", "q", "quit", "exit"}:
+        if choice.startswith(("retake:", "retake ")):
+            token_arg = choice.split(":", 1)[1] if ":" in choice else choice.split(None, 1)[1]
+            return f"retake:{token_arg.strip()}"
+        if choice in {"8", "q", "quit", "exit"}:
             return None
-        print(f"{COLORS.yellow}Please enter 1, 2, 3, 4, 5, or 6.{COLORS.reset}")
+        print(f"{COLORS.yellow}Please enter 1-8.{COLORS.reset}")
 
 
 def _sync_all_cases(base_dir: Path, db_path: Path | None = None) -> None:
@@ -325,6 +355,86 @@ def _launch_case_quiz(
         mode=mode,
         case=case,
     )
+
+
+def _retake_by_token(base_dir: Path, db_path: Path, token: str) -> bool:
+    """Looks up a quiz session by its 4-character token and launches a retake."""
+    clean_token = token.strip().upper()
+    _sync_all_cases(base_dir, db_path)
+    match = db.get_quiz_by_token(db_path, clean_token)
+    if match is None:
+        print(f"{COLORS.red}No quiz session found with token '{clean_token}'.{COLORS.reset}")
+        return False
+
+    case_key, nouns = match
+    cfg = Config.CASE_CONFIGS[case_key]
+    vocab_path = base_dir / cfg["vocab_file"]
+    all_cards = load_cards(vocab_path)
+    cards_by_noun = {card.noun: card for card in all_cards}
+    selected_cards = [cards_by_noun[n] for n in nouns if n in cards_by_noun]
+    if not selected_cards:
+        print(
+            f"{COLORS.red}Could not match nouns for token '{clean_token}' "
+            f"in '{vocab_path.name}'.{COLORS.reset}"
+        )
+        return False
+
+    print(
+        f"{COLORS.cyan}Retaking {cfg['name']} quiz from token "
+        f"'{clean_token}' ({len(selected_cards)} noun(s)).{COLORS.reset}"
+    )
+    start_article_quiz(
+        file_path=vocab_path,
+        results_path=base_dir / cfg["results_file"],
+        db_path=db_path,
+        mode=f"retake:{clean_token}",
+        case=case_key,
+        cards_override=selected_cards,
+    )
+    return True
+
+
+def _prompt_retake_interactive(base_dir: Path, db_path: Path | None = None) -> None:
+    """Prompts the user for a 4-character quiz token to retake."""
+    target_db = db_path if db_path is not None else base_dir / Config.DEFAULT_DB_FILE
+    while True:
+        try:
+            token = input(
+                "\nEnter 4-character quiz token to retake (or 'q' to go back): "
+            ).strip()
+        except (KeyboardInterrupt, EOFError):
+            print()
+            break
+
+        if token.lower() in {"", "q", "quit", "exit", "back"}:
+            break
+
+        if _retake_by_token(base_dir, target_db, token):
+            break
+
+
+def _show_sessions_interactive(base_dir: Path, db_path: Path | None = None) -> None:
+    """Displays recorded quiz sessions and optionally allows retaking one by token."""
+    target_db = db_path if db_path is not None else base_dir / Config.DEFAULT_DB_FILE
+    _sync_all_cases(base_dir, target_db)
+    sessions = db.display_sessions(target_db)
+    if not sessions:
+        return
+
+    while True:
+        try:
+            token = input(
+                "Enter a 4-character token to retake that quiz (or press Enter to go back): "
+            ).strip()
+        except (KeyboardInterrupt, EOFError):
+            print()
+            break
+
+        if token.lower() in {"", "q", "quit", "exit", "back"}:
+            break
+
+        if _retake_by_token(base_dir, target_db, token):
+            break
 
 
 def _show_review_interactive(base_dir: Path, db_path: Path | None = None) -> None:
@@ -438,6 +548,12 @@ def run_interactive_menu(file_path: Path, db_path: Path) -> None:
             break
         if choice == "stats":
             _show_stats_interactive(base_dir, db_path)
+        elif choice == "sessions":
+            _show_sessions_interactive(base_dir, db_path)
+        elif choice == "retake":
+            _prompt_retake_interactive(base_dir, db_path)
+        elif choice.startswith("retake:"):
+            _retake_by_token(base_dir, db_path, choice.split(":", 1)[1])
         elif choice == "review":
             _show_review_interactive(base_dir, db_path)
         elif ":" in choice:
@@ -452,11 +568,11 @@ def start_article_quiz(  # pylint: disable=too-many-arguments,too-many-positiona
     db_path: Path | None = None,
     mode: str = "standard",
     case: str = "nominativ",
+    cards_override: list[Flashcard] | None = None,
 ) -> None:
     """Runs the interactive German article quiz with replay prompting."""
-
-    cards = load_cards(file_path)
-    if not cards:
+    all_cards = load_cards(file_path)
+    if not all_cards:
         return
 
     case_cfg = Config.CASE_CONFIGS.get(case, Config.CASE_CONFIGS["nominativ"])
@@ -467,11 +583,12 @@ def start_article_quiz(  # pylint: disable=too-many-arguments,too-many-positiona
         db_path if db_path is not None else file_path.parent / Config.DEFAULT_DB_FILE
     )
 
-    _sync_database(target_db_path, target_results_path, cards, case=case)
+    _sync_database(target_db_path, target_results_path, all_cards, case=case)
+    active_cards = cards_override if cards_override is not None else all_cards
 
     while True:
         completed_normally = run_quiz_session(
-            cards, target_results_path, target_db_path, case_cfg, mode, case=case
+            active_cards, target_results_path, target_db_path, mode, case=case
         )
         if not completed_normally:
             break
@@ -509,6 +626,17 @@ def main() -> None:
         help="Shortcut to launch directly in review mode.",
     )
     parser.add_argument(
+        "--retake",
+        metavar="TOKEN",
+        default=None,
+        help="Retake a specific quiz session using its 4-character alphanumeric token.",
+    )
+    parser.add_argument(
+        "--sessions",
+        action="store_true",
+        help="Display recorded quiz sessions and their 4-character tokens, then exit.",
+    )
+    parser.add_argument(
         "--stats",
         action="store_true",
         help="Display performance KPIs and statistics from database, then exit.",
@@ -536,6 +664,15 @@ def main() -> None:
         else base_dir / Config.DEFAULT_DB_FILE
     )
     target_results_path = file_path.parent / case_cfg["results_file"]
+
+    if args.sessions:
+        _sync_all_cases(base_dir, target_db_path)
+        db.display_sessions(target_db_path, case=args.case)
+        return
+
+    if args.retake:
+        _retake_by_token(base_dir, target_db_path, args.retake)
+        return
 
     if args.stats:
         case_name = case_cfg["name"] if args.case is not None else None
