@@ -5,14 +5,13 @@ from dataclasses import dataclass
 import json
 from pathlib import Path
 import random
-import re
 import sys
 
 from config import Config
 import db
 
 COLORS = Config.COLORS
-CARD_PATTERN = re.compile(r"^[^;]+;[^;]+;[^;]+")
+
 
 @dataclass(frozen=True)
 class Flashcard:  # pylint: disable=too-few-public-methods
@@ -32,15 +31,14 @@ def load_cards(file_path: Path) -> list[Flashcard]:
 
     with file_path.open("r", encoding="utf-8") as file:
         for line in file:
-            trimmed = line.strip()
-            if not trimmed or not CARD_PATTERN.match(trimmed):
+            parts = [part.strip() for part in line.split(";")]
+            if len(parts) < 3 or not all(parts[:3]):
                 continue
-            parts = trimmed.split(";")
             cards.append(
                 Flashcard(
-                    article=parts[0].strip().lower(),
-                    noun=parts[1].strip(),
-                    translation=parts[2].strip(),
+                    article=parts[0].lower(),
+                    noun=parts[1],
+                    translation=parts[2],
                 )
             )
     return cards
@@ -153,18 +151,18 @@ def _prompt_card_choice(
         return options[answer]
 
 
-def _record_quiz_summary(  # pylint: disable=too-many-arguments,too-many-positional-arguments
+def _record_quiz_summary(
     target_results_path: Path,
     db_path: Path,
     mode: str,
     attempts: list[tuple[str, str, str, int, str]],
-    wrong_nouns: list[str],
     case: str = "nominativ",
 ) -> None:
     """Calculates and prints final score, then persists session to disk and database."""
     total = len(attempts)
     correct = sum(is_corr for _, _, _, is_corr, _ in attempts)
     wrong = total - correct
+    wrong_nouns = [noun for noun, _, _, is_corr, _ in attempts if not is_corr]
     percent = round((correct / total) * 100)
     print(f"\n{COLORS.cyan}Quiz finished! Score: {correct} / {total} ({percent}%){COLORS.reset}")
     save_results(target_results_path, correct, wrong, wrong_nouns)
@@ -175,7 +173,7 @@ def _record_quiz_summary(  # pylint: disable=too-many-arguments,too-many-positio
     )
 
 
-def run_quiz_session(  # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-locals
+def run_quiz_session(  # pylint: disable=too-many-arguments,too-many-positional-arguments
     cards: list[Flashcard],
     target_results_path: Path,
     db_path: Path,
@@ -189,9 +187,6 @@ def run_quiz_session(  # pylint: disable=too-many-arguments,too-many-positional-
     else:
         quiz_cards = random.sample(cards, min(Config.QUIZ_LENGTH, len(cards)))
 
-    options = case_cfg["options"]
-    labels = case_cfg["labels"]
-    wrong_nouns: list[str] = []
     attempts: list[tuple[str, str, str, int, str]] = []
     user_quit = False
 
@@ -200,7 +195,7 @@ def run_quiz_session(  # pylint: disable=too-many-arguments,too-many-positional-
         f"{' - Review' if mode == 'review' else ''}, "
         f"{len(quiz_cards)} questions) ==={COLORS.reset}"
     )
-    prompt_hint = "/".join(str(i) for i in range(1, len(labels) + 1))
+    prompt_hint = "/".join(str(i) for i in range(1, len(case_cfg["labels"]) + 1))
     print(
         f"{COLORS.dark_gray}Select {prompt_hint} "
         f"(or type article). Enter 'q' to quit.{COLORS.reset}\n"
@@ -208,21 +203,20 @@ def run_quiz_session(  # pylint: disable=too-many-arguments,too-many-positional-
 
     try:
         for idx, card in enumerate(quiz_cards, start=1):
-            chosen = _prompt_card_choice(card, idx, len(quiz_cards), options, labels)
+            chosen = _prompt_card_choice(
+                card, idx, len(quiz_cards), case_cfg["options"], case_cfg["labels"]
+            )
             if chosen is None:
                 user_quit = True
                 break
 
-            if chosen == card.article:
-                attempts.append(
-                    (card.noun, card.article, chosen, 1, Config.current_timestamp())
-                )
+            is_correct = int(chosen == card.article)
+            attempts.append(
+                (card.noun, card.article, chosen, is_correct, Config.current_timestamp())
+            )
+            if is_correct:
                 print(f"{COLORS.green}Correct! ({card.article} {card.noun}){COLORS.reset}\n")
             else:
-                wrong_nouns.append(card.noun)
-                attempts.append(
-                    (card.noun, card.article, chosen, 0, Config.current_timestamp())
-                )
                 print(
                     f"{COLORS.red}Wrong! The correct article is: "
                     f"{card.article} ({card.article} {card.noun}){COLORS.reset}\n"
@@ -233,7 +227,7 @@ def run_quiz_session(  # pylint: disable=too-many-arguments,too-many-positional-
 
     if attempts:
         _record_quiz_summary(
-            target_results_path, db_path, mode, attempts, wrong_nouns, case=case
+            target_results_path, db_path, mode, attempts, case=case
         )
 
     return not user_quit
@@ -307,6 +301,32 @@ def _sync_all_cases(base_dir: Path, db_path: Path | None = None) -> None:
             _sync_database(target_db, results_path, cards, case=case_key)
 
 
+def _resolve_case_choice(choice: str, case_keys: list[str]) -> str | None:
+    """Maps a 1-based numeric index, case key, or case display name to a case key."""
+    return next(
+        (
+            key
+            for idx, key in enumerate(case_keys, start=1)
+            if choice in {str(idx), key, Config.CASE_CONFIGS[key]["name"].lower()}
+        ),
+        None,
+    )
+
+
+def _launch_case_quiz(
+    base_dir: Path, db_path: Path, case: str, mode: str = "standard"
+) -> None:
+    """Resolves vocabulary and results paths for a case and starts a quiz."""
+    cfg = Config.CASE_CONFIGS[case]
+    start_article_quiz(
+        file_path=base_dir / cfg["vocab_file"],
+        results_path=base_dir / cfg["results_file"],
+        db_path=db_path,
+        mode=mode,
+        case=case,
+    )
+
+
 def _show_review_interactive(base_dir: Path, db_path: Path | None = None) -> None:
     """Displays review menu to select which grammatical case to practice."""
     target_db = db_path if db_path is not None else base_dir / Config.DEFAULT_DB_FILE
@@ -336,16 +356,9 @@ def _show_review_interactive(base_dir: Path, db_path: Path | None = None) -> Non
         if choice in {str(len(case_keys) + 1), "q", "quit", "exit", "", "back"}:
             break
 
-        selected_key = next(
-            (key for idx, key in enumerate(case_keys, start=1)
-             if choice in {str(idx), key, Config.CASE_CONFIGS[key]["name"].lower()}),
-            None,
-        )
+        selected_key = _resolve_case_choice(choice, case_keys)
         if selected_key is not None:
-            cfg = Config.CASE_CONFIGS[selected_key]
-            case_file = base_dir / cfg["vocab_file"]
-            case_results = base_dir / cfg["results_file"]
-            start_article_quiz(case_file, case_results, target_db, mode="review", case=selected_key)
+            _launch_case_quiz(base_dir, target_db, selected_key, mode="review")
             break
         print(f"{COLORS.yellow}Invalid option. Please choose 1-{len(case_keys) + 1}.{COLORS.reset}")
 
@@ -379,12 +392,7 @@ def _show_stats_interactive(base_dir: Path, db_path: Path | None = None) -> None
         if choice in {str(len(case_keys) + 1), "q", "quit", "exit", "", "back"}:
             break
 
-        selected_key = None
-        for idx, key in enumerate(case_keys, start=1):
-            if choice in {str(idx), key, Config.CASE_CONFIGS[key]["name"].lower()}:
-                selected_key = key
-                break
-
+        selected_key = _resolve_case_choice(choice, case_keys)
         if selected_key is not None:
             cfg = Config.CASE_CONFIGS[selected_key]
             db.display_kpis(target_db, title=cfg["name"], case=selected_key)
@@ -421,9 +429,7 @@ def _run_stats_cli(  # pylint: disable=too-many-arguments,too-many-positional-ar
         db.display_kpis(target_db_path, title=cfg["name"], case=k)
 
 
-def run_interactive_menu(
-    file_path: Path, results_path: Path, db_path: Path  # pylint: disable=unused-argument
-) -> None:
+def run_interactive_menu(file_path: Path, db_path: Path) -> None:
     """Runs the interactive top-level menu loop."""
     base_dir = file_path.parent
     while True:
@@ -434,22 +440,10 @@ def run_interactive_menu(
             _show_stats_interactive(base_dir, db_path)
         elif choice == "review":
             _show_review_interactive(base_dir, db_path)
-        elif choice.startswith("review:"):
-            selected_case = choice.split(":")[1]
-            cfg = Config.CASE_CONFIGS[selected_case]
-            case_file = base_dir / cfg["vocab_file"]
-            case_results = base_dir / cfg["results_file"]
-            start_article_quiz(
-                case_file, case_results, db_path, mode="review", case=selected_case
-            )
-        elif choice.startswith("case:"):
-            selected_case = choice.split(":")[1]
-            cfg = Config.CASE_CONFIGS[selected_case]
-            case_file = base_dir / cfg["vocab_file"]
-            case_results = base_dir / cfg["results_file"]
-            start_article_quiz(
-                case_file, case_results, db_path, mode="standard", case=selected_case
-            )
+        elif ":" in choice:
+            prefix, selected_case = choice.split(":", 1)
+            mode = "review" if prefix == "review" else "standard"
+            _launch_case_quiz(base_dir, db_path, selected_case, mode=mode)
 
 
 def start_article_quiz(  # pylint: disable=too-many-arguments,too-many-positional-arguments
@@ -562,7 +556,7 @@ def main() -> None:
         )
         return
 
-    run_interactive_menu(file_path, target_results_path, target_db_path)
+    run_interactive_menu(file_path, target_db_path)
 
 
 if __name__ == "__main__":

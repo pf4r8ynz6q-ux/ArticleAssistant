@@ -17,6 +17,15 @@ def _get_table_names(case: str = "nominativ") -> tuple[str, str]:
     return f"{clean_case}_quiz_sessions", f"{clean_case}_card_attempts"
 
 
+def _table_exists(cursor: sqlite3.Cursor, table_name: str) -> bool:
+    """Checks whether a table exists in the SQLite database."""
+    cursor.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+        (table_name,),
+    )
+    return cursor.fetchone() is not None
+
+
 def init_db(db_path: Path, case: str = "nominativ") -> None:
     """Initializes SQLite database schema for sessions, card attempts, and metadata."""
     sessions_table, attempts_table = _get_table_names(case)
@@ -25,24 +34,12 @@ def init_db(db_path: Path, case: str = "nominativ") -> None:
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
         if case == "nominativ":
-            cursor.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='quiz_sessions'"
-            )
-            if cursor.fetchone():
-                cursor.execute(
-                    f"SELECT name FROM sqlite_master WHERE type='table' AND name='{sessions_table}'"
-                )
-                if not cursor.fetchone():
-                    cursor.execute(f"ALTER TABLE quiz_sessions RENAME TO {sessions_table}")
-            cursor.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='card_attempts'"
-            )
-            if cursor.fetchone():
-                cursor.execute(
-                    f"SELECT name FROM sqlite_master WHERE type='table' AND name='{attempts_table}'"
-                )
-                if not cursor.fetchone():
-                    cursor.execute(f"ALTER TABLE card_attempts RENAME TO {attempts_table}")
+            for old_table, new_table in (
+                ("quiz_sessions", sessions_table),
+                ("card_attempts", attempts_table),
+            ):
+                if _table_exists(cursor, old_table) and not _table_exists(cursor, new_table):
+                    cursor.execute(f"ALTER TABLE {old_table} RENAME TO {new_table}")
         cursor.execute(
             f"""
             CREATE TABLE IF NOT EXISTS {sessions_table} (
@@ -134,8 +131,8 @@ def migrate_results_txt(
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT value FROM meta WHERE key = ? OR \
-                  (key = 'results_txt_migrated' AND ? = 'nominativ')",
+            "SELECT value FROM meta WHERE key = ? OR "
+            "(key = 'results_txt_migrated' AND ? = 'nominativ')",
             (meta_key, case),
         )
         if cursor.fetchone():
@@ -216,11 +213,7 @@ def get_troubled_nouns(
     _, attempts_table = _get_table_names(case)
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
-        cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
-            (attempts_table,),
-        )
-        if not cursor.fetchone():
+        if not _table_exists(cursor, attempts_table):
             return []
 
         cursor.execute(
@@ -261,11 +254,7 @@ def get_session_summary(db_path: Path, case: str = "nominativ") -> tuple[int, in
     sessions_table, _ = _get_table_names(case)
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
-        cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
-            (sessions_table,),
-        )
-        if not cursor.fetchone():
+        if not _table_exists(cursor, sessions_table):
             return 0, 0, 0
 
         cursor.execute(
@@ -379,50 +368,32 @@ def display_kpis(
         )
         return
 
-    sessions_table, attempts_table = _get_table_names(case)
+    sessions_count, total_qs, total_correct = get_session_summary(db_path, case=case)
+    if sessions_count == 0:
+        label = f" for {title}" if title else ""
+        print(
+            f"{COLORS.yellow}No quiz sessions recorded yet{label}. "
+            f"Complete a quiz to view KPIs!{COLORS.reset}"
+        )
+        return
+
+    overall_acc = round((total_correct / total_qs) * 100, 1) if total_qs else 0.0
+    acc_color = COLORS.green if overall_acc >= 75 else COLORS.yellow
+    header = (
+        f"=== Performance KPIs & Quiz Statistics ({title}) ==="
+        if title
+        else "=== Performance KPIs & Quiz Statistics ==="
+    )
+
+    print(f"\n{COLORS.cyan}{header}{COLORS.reset}")
+    print(f"Total Sessions:      {sessions_count}")
+    print(f"Questions Answered:  {total_qs}")
+    print(f"Correct Answers:     {total_correct}")
+    print(f"Overall Accuracy:    {acc_color}{overall_acc}%{COLORS.reset}")
+
+    _, attempts_table = _get_table_names(case)
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
-        cursor.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
-            (sessions_table,),
-        )
-        if not cursor.fetchone():
-            label = f" for {title}" if title else ""
-            print(
-                f"{COLORS.yellow}No quiz sessions recorded yet{label}. "
-                f"Complete a quiz to view KPIs!{COLORS.reset}"
-            )
-            return
-        cursor.execute(
-            f"""
-            SELECT COUNT(*), COALESCE(SUM(total), 0), COALESCE(SUM(correct), 0)
-            FROM {sessions_table}
-            """
-        )
-        sessions_count, total_qs, total_correct = cursor.fetchone()
-
-        if sessions_count == 0:
-            label = f" for {title}" if title else ""
-            print(
-                f"{COLORS.yellow}No quiz sessions recorded yet{label}. "
-                f"Complete a quiz to view KPIs!{COLORS.reset}"
-            )
-            return
-
-        overall_acc = round((total_correct / total_qs) * 100, 1) if total_qs else 0.0
-        acc_color = COLORS.green if overall_acc >= 75 else COLORS.yellow
-        header = (
-            f"=== Performance KPIs & Quiz Statistics ({title}) ==="
-            if title
-            else "=== Performance KPIs & Quiz Statistics ==="
-        )
-
-        print(f"\n{COLORS.cyan}{header}{COLORS.reset}")
-        print(f"Total Sessions:      {sessions_count}")
-        print(f"Questions Answered:  {total_qs}")
-        print(f"Correct Answers:     {total_correct}")
-        print(f"Overall Accuracy:    {acc_color}{overall_acc}%{COLORS.reset}")
-
         _display_article_stats(cursor, attempts_table)
         _display_troubled_words(cursor, attempts_table)
-        print()
+    print()
